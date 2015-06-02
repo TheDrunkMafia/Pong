@@ -34,7 +34,7 @@ public class ServerGameState extends NetworkState {
         super.start();
         try {
             server = new ServerSocket(Integer.valueOf(port), 200, InetAddress.getByName(ip));
-            JOptionPane.showMessageDialog(Game.instance.frame, "Server has been started on: " + ip + ":" + port + " waiting for a client...", "Server Message", 0);
+            JOptionPane.showMessageDialog(Game.getInstance().frame, "Server has been started on: " + ip + ":" + port + " waiting for a client...", "Server Message", 0);
 
             connection = server.accept();
 
@@ -42,10 +42,10 @@ public class ServerGameState extends NetworkState {
             input = new ObjectInputStream(connection.getInputStream());
         } catch (IOException e) {
             if(e instanceof BindException)
-                JOptionPane.showMessageDialog(Game.instance.frame, "The port: " + port + " has already been bind to another application, please use another free port");
+                JOptionPane.showMessageDialog(Game.getInstance().frame, "The port: " + port + " has already been bind to another application, please use another free port");
 
             e.printStackTrace();
-            Game.instance.attachState(new PlayMenuState());
+            Game.getInstance().attachState(new PlayMenuState());
         }
 
         countdown = false;
@@ -57,10 +57,14 @@ public class ServerGameState extends NetworkState {
         players.add(new Human("Player 1", new Score("Player 1", 0, getHeight() / 2 - 20), 330, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT));
         players.add(new NetworkPlayer("Player 2", new Score("Player 2", getWidth() - 30, getHeight() / 2 - 20), 30));
 
-        Game.instance.frame.setName("Server");
-        Game.instance.frame.add(this);
+        Game.getInstance().frame.setName("Server");
+        Game.getInstance().frame.add(this);
     }
 
+    /**
+     * Checks the score of all the players, to see if they have exceeded
+     * the score limit and if so crowns them as the winner
+     */
     @Override
     public void checkScore(){
         for(int i = 0; i < players.size(); i++){
@@ -69,8 +73,8 @@ public class ServerGameState extends NetworkState {
                 String msg = score.getName() + " has won by reaching: " + SettingState.scoreLimit;
                 System.out.println(msg);
                 ChannelHandler.handler.sendPacket(new WinningPacket(msg));
-                JOptionPane.showMessageDialog(Game.instance.frame, msg);
-                Game.instance.attachState(new PlayMenuState());
+                JOptionPane.showMessageDialog(Game.getInstance().frame, msg);
+                Game.getInstance().attachState(new PlayMenuState());
                 return;
             }
         }

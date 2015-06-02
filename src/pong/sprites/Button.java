@@ -16,7 +16,7 @@ import java.lang.reflect.Method;
  */
 public class Button extends Sprite implements MouseListener {
 
-    private int xSize, ySize;
+    public int xSize, ySize;
 
     public String text = "";
     public Runnable method;
@@ -31,7 +31,7 @@ public class Button extends Sprite implements MouseListener {
         this.xSize = xSize;
         this.ySize = ySize;
 
-        Game.instance.frame.addMouseListener(this);
+        Game.getInstance().frame.addMouseListener(this);
     }
 
     public Button(String text, Runnable method){
@@ -40,10 +40,10 @@ public class Button extends Sprite implements MouseListener {
 
     @Override
     public void paint(Graphics2D g) {
-        JPanel pannel = Game.instance.getCurrentState(JPanel.class);
+        JPanel pannel = Game.getInstance().getCurrentState(JPanel.class);
 
         Point point = new Point(MouseInfo.getPointerInfo().getLocation());
-        SwingUtilities.convertPointFromScreen(point, pannel != null ? pannel : Game.instance.frame);
+        SwingUtilities.convertPointFromScreen(point, pannel != null ? pannel : Game.getInstance().frame);
 
         Rectangle bounds = getBounds();
         g.setColor(bounds.contains(point) ? hover : base);
@@ -70,7 +70,7 @@ public class Button extends Sprite implements MouseListener {
 
     public void mousePressed(MouseEvent e) {
         Point point = new Point(MouseInfo.getPointerInfo().getLocation());
-        SwingUtilities.convertPointFromScreen(point, Game.instance.frame);
+        SwingUtilities.convertPointFromScreen(point, Game.getInstance().frame);
         if (getBounds().contains(point))
             method.run();
     }

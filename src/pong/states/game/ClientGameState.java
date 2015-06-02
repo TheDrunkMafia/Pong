@@ -39,10 +39,13 @@ public class ClientGameState extends NetworkState {
         players.add(new Human("Player 2", new Score("Player 2", getWidth() - 30, getHeight() / 2 - 20), 30, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT));
         players.add(new NetworkPlayer("Player 1", new NetworkScore("Player 1", 0, getHeight() / 2 - 20), 330));
 
-        Game.instance.frame.setName("Client");
-        Game.instance.frame.add(this);
+        Game.getInstance().frame.setName("Client");
+        Game.getInstance().frame.add(this);
     }
 
+    /**
+     * Normally scores are checked for winners, but this is handled on the server side
+     */
     @Override
     public void checkScore(){
     }

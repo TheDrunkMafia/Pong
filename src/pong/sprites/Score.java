@@ -31,6 +31,9 @@ public class Score extends Sprite {
         g.drawString(String.valueOf(score), xPosition, yPosition);
     }
 
+    /**
+     * Increments the score and sends a packet to the client if this is the server
+     */
     public void increment() {
         if (ChannelHandler.handler != null) {
             score++;

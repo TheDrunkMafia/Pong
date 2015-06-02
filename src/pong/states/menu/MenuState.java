@@ -17,11 +17,11 @@ public class MenuState extends JPanel implements State {
     public void start() {
         setFocusable(true);
         setVisible(true);
-        Game.instance.frame.add(this);
+        Game.getInstance().frame.add(this);
 
-        play = new Button("Play", new Runnable() {public void run() { Game.instance.attachState(new PlayMenuState()); }}, Color.BLACK, Color.GRAY, Game.instance.getWidth() / 2 - 250 / 2, 100, 250, 60);
-        help = new Button("Help", new Runnable() {public void run() { Game.instance.attachState(new HelpMenuState()); }}, Color.BLACK, Color.GRAY, Game.instance.getWidth() / 2 - 250 / 2, 180, 250, 60);
-        settings = new Button("Settings",  new Runnable() {public void run() { Game.instance.attachState(new SettingState()); }}, Color.BLACK, Color.GRAY, Game.instance.getWidth() / 2 - 250 / 2, 260, 250, 60);
+        play = new Button("Play", new Runnable() {public void run() { Game.getInstance().attachState(new PlayMenuState()); }}, Color.BLACK, Color.GRAY, Game.getInstance().getWidth() / 2 - 250 / 2, 100, 250, 60);
+        help = new Button("Help", new Runnable() {public void run() { Game.getInstance().attachState(new HelpMenuState()); }}, Color.BLACK, Color.GRAY, Game.getInstance().getWidth() / 2 - 250 / 2, 180, 250, 60);
+        settings = new Button("Settings",  new Runnable() {public void run() { Game.getInstance().attachState(new SettingState()); }}, Color.BLACK, Color.GRAY, Game.getInstance().getWidth() / 2 - 250 / 2, 260, 250, 60);
     }
 
     public void update() {
@@ -44,7 +44,7 @@ public class MenuState extends JPanel implements State {
         g.setFont(new Font("Verdana", Font.BOLD, 40));
         String text = "PING PONG";
 
-        g.drawString(text, Game.instance.getWidth() / 2 - text.length() * 15, 60);
+        g.drawString(text, Game.getInstance().getWidth() / 2 - text.length() * 15, 60);
 
         for (int i = 0; i < Sprite.spritePool.size(); i++)
             Sprite.spritePool.get(i).paint(g2d);
@@ -52,12 +52,12 @@ public class MenuState extends JPanel implements State {
 
     @Override
     public int getWidth() {
-        return Game.instance.getWidth();
+        return Game.getInstance().getWidth();
     }
 
     @Override
     public int getHeight() {
-        return Game.instance.getHeight();
+        return Game.getInstance().getHeight();
     }
 
     public void end() {

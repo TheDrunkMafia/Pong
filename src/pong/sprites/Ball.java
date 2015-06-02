@@ -17,7 +17,7 @@ public class Ball extends Sprite implements Collidable {
     public static final int DIAMETER = 30;
 
     public Ball() {
-        super((Game.instance.getCurrentState(GameState.class).getWidth() / 2) - DIAMETER, (Game.instance.getCurrentState(GameState.class).getHeight() / 2) - DIAMETER);
+        super((Game.getInstance().getCurrentState(GameState.class).getWidth() / 2) - DIAMETER, (Game.getInstance().getCurrentState(GameState.class).getHeight() / 2) - DIAMETER);
 
         xVelocity = rand.nextBoolean() ? 1 : -1;
         yVelocity = rand.nextBoolean() ? 1 : -1;
@@ -28,8 +28,8 @@ public class Ball extends Sprite implements Collidable {
         int tempX = (int) (xPosition + xVelocity);
         int tempY = (int) (yPosition + yVelocity);
 
-        xVelocity = tempX < 0 ? speed : tempX > Game.instance.getCurrentState(GameState.class).getWidth() - DIAMETER ? -speed : xVelocity;
-        yVelocity = tempY < 0 ? speed : tempY > Game.instance.getCurrentState(GameState.class).getHeight() - DIAMETER ? -speed : yVelocity;
+        xVelocity = tempX < 0 ? speed : tempX > Game.getInstance().getCurrentState(GameState.class).getWidth() - DIAMETER ? -speed : xVelocity;
+        yVelocity = tempY < 0 ? speed : tempY > Game.getInstance().getCurrentState(GameState.class).getHeight() - DIAMETER ? -speed : yVelocity;
 
         xPosition = tempX;
         yPosition = tempY;

@@ -41,7 +41,7 @@ public class WinningPacket implements IMessage {
         for (int i = 0; i < bytes.length; i++)
             bytes[i] = input.readByte();
         msg = new String(bytes);
-        JOptionPane.showMessageDialog(Game.instance.frame, msg);
-        Game.instance.attachState(new PlayMenuState());
+        JOptionPane.showMessageDialog(Game.getInstance().frame, msg);
+        Game.getInstance().attachState(new PlayMenuState());
     }
 }

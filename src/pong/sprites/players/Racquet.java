@@ -23,11 +23,11 @@ public class Racquet extends Sprite implements Collidable {
     }
 
     public Racquet(String name, Score score, int yPos) {
-        super(Game.instance.getCurrentState(GameState.class).getWidth() / 2 - WIDTH, yPos);
+        super(Game.getInstance().getCurrentState(GameState.class).getWidth() / 2 - WIDTH, yPos);
 
         this.name = name;
         this.score = score;
-        new DeadZone(this, yPos > (Game.instance.getCurrentState(GameState.class).getHeight() / 2) ? yPos + 15 : 0);
+        new DeadZone(this, yPos > (Game.getInstance().getCurrentState(GameState.class).getHeight() / 2) ? yPos + 15 : 0);
     }
 
     @Override
@@ -37,10 +37,8 @@ public class Racquet extends Sprite implements Collidable {
             speed /= 2;
 
         int tempX = (int) (xPosition + xVelocity);
-        xPosition = tempX > 0 && tempX < Game.instance.getCurrentState(GameState.class).getWidth() - WIDTH ? tempX : xPosition;
+        xPosition = tempX > 0 && tempX < Game.getInstance().getCurrentState(GameState.class).getWidth() - WIDTH ? tempX : xPosition;
 
-        if (Game.instance.debug)
-            System.out.println("Ball (" + hashCode() + ") X: " + xPosition + " Y: " + yPosition + " XVel: " + xVelocity + " YVel: " + yVelocity);
     }
 
     @Override

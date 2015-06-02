@@ -34,7 +34,7 @@ public class PausePacket implements IMessage {
     @Override
     public void fromBytes(ObjectInputStream input) throws IOException {
         boolean isPaused = input.readByte() == 1;
-        NetworkState state = Game.instance.getCurrentState(NetworkState.class);
+        NetworkState state = Game.getInstance().getCurrentState(NetworkState.class);
         if(state != null) state.paused = isPaused;
     }
 }

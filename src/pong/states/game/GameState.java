@@ -45,7 +45,7 @@ public class GameState extends JPanel implements State {
         players.add(new AI("Player 1", new Score("Player 1", 0, getHeight() / 2 - 20), 330));
         players.add(new Human("Player 2", new Score("Player 2", getWidth() - 30, getHeight() / 2 - 20), 30, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT));
 
-        Game.instance.frame.add(this);
+        Game.getInstance().frame.add(this);
     }
 
     boolean keyDown;
@@ -85,12 +85,16 @@ public class GameState extends JPanel implements State {
         }
     }
 
+    /**
+     * Checks the score of all the players, to see if they have exceeded
+     * the score limit and if so crowns them as the winner
+     */
     public void checkScore(){
         for(Racquet player : players){
             Score score = player.getScore();
             if(score.score >= SettingState.scoreLimit){
-                JOptionPane.showMessageDialog(Game.instance.frame, score.getName() + " has won by reaching: " + SettingState.scoreLimit);
-                Game.instance.attachState(new PlayMenuState());
+                JOptionPane.showMessageDialog(Game.getInstance().frame, score.getName() + " has won by reaching: " + SettingState.scoreLimit);
+                Game.getInstance().attachState(new PlayMenuState());
             }
         }
     }
@@ -116,7 +120,7 @@ public class GameState extends JPanel implements State {
      * Called when ESC is pressed
      */
    public void onPause(){
-       back = new Button("Quit", new Runnable() {public void run() { Game.instance.getCurrentState(GameState.class).quit(); }}, Color.BLACK, Color.GRAY, Game.instance.getWidth() / 2 - 250 / 2, 300, 250, 30);
+       back = new Button("Quit", new Runnable() {public void run() { Game.getInstance().getCurrentState(GameState.class).quit(); }}, Color.BLACK, Color.GRAY, Game.getInstance().getWidth() / 2 - 250 / 2, 300, 250, 30);
    }
 
     public void onUnPause(){
@@ -142,7 +146,7 @@ public class GameState extends JPanel implements State {
             g.setFont(new Font("Verdana", Font.BOLD, 30));
             String text = paused ? "Paused!" : count == 1 ? "Play!" : String.valueOf(count - 1);
 
-            g.drawString(text, Game.instance.getWidth() / 2 - text.length() * 8, Game.instance.getHeight() / 2 + 10);
+            g.drawString(text, Game.getInstance().getWidth() / 2 - text.length() * 8, Game.getInstance().getHeight() / 2 + 10);
             if(paused)
                 paused(g);
         } else {
@@ -161,17 +165,17 @@ public class GameState extends JPanel implements State {
     }
 
     public void quit(){
-        Game.instance.attachState(new PlayMenuState());
+        Game.getInstance().attachState(new PlayMenuState());
     }
 
     @Override
     public int getWidth() {
-        return Game.instance.getWidth();
+        return Game.getInstance().getWidth();
     }
 
     @Override
     public int getHeight() {
-        return Game.instance.getHeight();
+        return Game.getInstance().getHeight();
     }
 
     public void end() {

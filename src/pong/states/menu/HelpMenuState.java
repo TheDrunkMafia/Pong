@@ -72,12 +72,12 @@ public class HelpMenuState extends JPanel implements State {
     public void start() {
         setFocusable(true);
         setVisible(true);
-        Game.instance.frame.add(this);
+        Game.getInstance().frame.add(this);
 
-        exit = new Button("Back", new Runnable() {public void run() { Game.instance.attachState(new MenuState()); }}, Color.BLACK, Color.GRAY, Game.instance.getWidth() / 2 - 100 / 2, Game.instance.getHeight() - 90, 100, 60);
+        exit = new Button("Back", new Runnable() {public void run() { Game.getInstance().attachState(new MenuState()); }}, Color.BLACK, Color.GRAY, Game.getInstance().getWidth() / 2 - 100 / 2, Game.getInstance().getHeight() - 90, 100, 60);
 
-        back = new Button("<--", new Runnable() {public void run() { helpIndex += helpIndex > 0 ? -1 : 0; }}, Color.BLACK, Color.GRAY, 0, Game.instance.getHeight() - 90, 100, 60);
-        forward = new Button("-->", new Runnable() {public void run() { helpIndex += helpIndex < help.length - 1 ? 1 : 0; }}, Color.BLACK, Color.GRAY, Game.instance.getWidth() - 100, Game.instance.getHeight() - 90, 100, 60);
+        back = new Button("<--", new Runnable() {public void run() { helpIndex += helpIndex > 0 ? -1 : 0; }}, Color.BLACK, Color.GRAY, 0, Game.getInstance().getHeight() - 90, 100, 60);
+        forward = new Button("-->", new Runnable() {public void run() { helpIndex += helpIndex < help.length - 1 ? 1 : 0; }}, Color.BLACK, Color.GRAY, Game.getInstance().getWidth() - 100, Game.getInstance().getHeight() - 90, 100, 60);
     }
 
     public void update() {
@@ -100,7 +100,7 @@ public class HelpMenuState extends JPanel implements State {
         g.setFont(new Font("Verdana", Font.BOLD, 40));
         String text = "Help";
 
-        g.drawString(text, Game.instance.getWidth() / 2 - text.length() * 15, 60);
+        g.drawString(text, Game.getInstance().getWidth() / 2 - text.length() * 15, 60);
 
         g.setColor(Color.BLACK);
         g.setFont(new Font("Verdana", Font.BOLD, 15));
@@ -117,12 +117,12 @@ public class HelpMenuState extends JPanel implements State {
 
     @Override
     public int getWidth() {
-        return Game.instance.getWidth();
+        return Game.getInstance().getWidth();
     }
 
     @Override
     public int getHeight() {
-        return Game.instance.getHeight();
+        return Game.getInstance().getHeight();
     }
 
     public void end() {

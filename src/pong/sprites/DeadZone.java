@@ -21,7 +21,7 @@ public class DeadZone extends Sprite implements Collidable {
         super(0, yPosition);
         this.racquet = racquet;
 
-        width = Game.instance.getCurrentState(GameState.class).getWidth();
+        width = Game.getInstance().getCurrentState(GameState.class).getWidth();
         height = 20;
     }
 
@@ -41,15 +41,15 @@ public class DeadZone extends Sprite implements Collidable {
 
     public void onCollide(Sprite collision) {
         if (collision instanceof Ball) {
-            GameState game = Game.instance.getCurrentState(GameState.class);
+            GameState game = Game.getInstance().getCurrentState(GameState.class);
             if(game instanceof ClientGameState)
                 return;
             racquet.getScore().increment();
             for (Racquet player : game.players)
                 player.xPosition = game.getWidth() / 2 - Racquet.WIDTH;
 
-            game.ball.xPosition = (Game.instance.getCurrentState(GameState.class).getWidth() / 2) - Ball.DIAMETER;
-            game.ball.yPosition = (Game.instance.getCurrentState(GameState.class).getHeight() / 2) - Ball.DIAMETER;
+            game.ball.xPosition = (Game.getInstance().getCurrentState(GameState.class).getWidth() / 2) - Ball.DIAMETER;
+            game.ball.yPosition = (Game.getInstance().getCurrentState(GameState.class).getHeight() / 2) - Ball.DIAMETER;
             game.ball.speed = 1;
         }
     }

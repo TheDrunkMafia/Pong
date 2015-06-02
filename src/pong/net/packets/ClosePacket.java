@@ -25,10 +25,10 @@ public class ClosePacket implements IMessage {
 
     @Override
     public void fromBytes(ObjectInputStream input) throws IOException {
-        NetworkState state = Game.instance.getCurrentState(NetworkState.class);
+        NetworkState state = Game.getInstance().getCurrentState(NetworkState.class);
         if(state != null){
             state.connection.close();
-            Game.instance.attachState(new MenuState());
+            Game.getInstance().attachState(new MenuState());
         }
     }
 }

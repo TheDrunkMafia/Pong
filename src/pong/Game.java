@@ -7,14 +7,22 @@ import pong.states.State;
 import javax.swing.*;
 
 public class Game {
-    public static Game instance;
+    private static Game INSTANCE;
+
+    /**
+     * Singletons theory, only one instance of the game class can ever exist
+     *
+     * @return game instance
+     */
+    public static Game getInstance(){
+        return INSTANCE != null ? INSTANCE : (INSTANCE = new Game(300, 400));
+    }
 
     public State currentState;
     public JFrame frame;
-    public boolean debug;
     private int xSize, ySize;
 
-    public Game(int xSize, int ySize) {
+    private Game(int xSize, int ySize) {
         this.xSize = xSize;
         this.ySize = ySize;
 
@@ -31,7 +39,6 @@ public class Game {
                 }
             }
         });
-        debug = false;
     }
 
     /**
@@ -40,9 +47,9 @@ public class Game {
      * @param args Arguments passed in by the JVM
      */
     public static void main(String[] args) throws InterruptedException {
-        instance = new Game(300, 400);
-        instance.attachState(new MenuState());
-        instance.update();
+        Game game = getInstance();
+        game.attachState(new MenuState());
+        game.update();
 
         System.out.println("END!");
     }
@@ -65,7 +72,8 @@ public class Game {
     }
 
     /**
-     * Attaching a state will put it into the update loop
+     * Attaching a state will put it into the update loop, it also fires the
+     * start event of the state and the end event of the old state
      *
      * @param state
      */
@@ -91,7 +99,8 @@ public class Game {
     }
 
     /**
-     * Returns the current state attached to the update loop
+     * Returns the current state attached to the update loop, can be
+     * casted to a super class via the passed in type
      *
      * @param type Class of which is attached
      */

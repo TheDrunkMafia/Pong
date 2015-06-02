@@ -28,22 +28,23 @@ public class NetworkState extends GameState {
 
     public NetworkState() {
         super();
-        new ChannelHandler(this);
+        ChannelHandler handler = new ChannelHandler(this);
+        handler.update();
     }
 
     @Override
     public void start() {
         boolean details = true;
         while(details){
-            ip = JOptionPane.showInputDialog(Game.instance.frame, "Please enter the Server IP", ip);
-            port = JOptionPane.showInputDialog(Game.instance.frame, "Please enter the Port Number", port);
+            ip = JOptionPane.showInputDialog(Game.getInstance().frame, "Please enter the Server IP", ip);
+            port = JOptionPane.showInputDialog(Game.getInstance().frame, "Please enter the Port Number", port);
             details = JOptionPane.showConfirmDialog(this, "IP: " + ip + " PORT: " + port, "Details check",  JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) != JOptionPane.YES_OPTION;
         }
 
         if(ip == null || ip.isEmpty() || port == null || port.isEmpty()) {
             JOptionPane.showInternalMessageDialog(this, "Please enter some values");
 
-            Game.instance.attachState(new MultiplayerMenuState());
+            Game.getInstance().attachState(new MultiplayerMenuState());
             return;
         }
 

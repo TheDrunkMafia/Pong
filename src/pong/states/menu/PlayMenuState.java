@@ -17,11 +17,11 @@ public class PlayMenuState extends JPanel implements State {
     public void start() {
         setFocusable(true);
         setVisible(true);
-        Game.instance.frame.add(this);
+        Game.getInstance().frame.add(this);
 
-        single = new Button("SinglePlayer", new Runnable() {public void run() { Game.instance.attachState(new GameState()); }}, Color.BLACK, Color.GRAY, Game.instance.getWidth() / 2 - 250 / 2, 100, 250, 60);
-        multi = new Button("MultiPlayer", new Runnable() {public void run() { Game.instance.attachState(new MultiplayerMenuState()); }}, Color.BLACK, Color.GRAY, Game.instance.getWidth() / 2 - 250 / 2, 180, 250, 60);
-        back = new Button("Back", new Runnable() {public void run() { Game.instance.attachState(new MenuState()); }}, Color.BLACK, Color.GRAY, Game.instance.getWidth() / 2 - 250 / 2, 260, 250, 60);
+        single = new Button("SinglePlayer", new Runnable() {public void run() { Game.getInstance().attachState(new GameState()); }}, Color.BLACK, Color.GRAY, Game.getInstance().getWidth() / 2 - 250 / 2, 100, 250, 60);
+        multi = new Button("MultiPlayer", new Runnable() {public void run() { Game.getInstance().attachState(new MultiplayerMenuState()); }}, Color.BLACK, Color.GRAY, Game.getInstance().getWidth() / 2 - 250 / 2, 180, 250, 60);
+        back = new Button("Back", new Runnable() {public void run() { Game.getInstance().attachState(new MenuState()); }}, Color.BLACK, Color.GRAY, Game.getInstance().getWidth() / 2 - 250 / 2, 260, 250, 60);
     }
 
     public void update() {
@@ -44,7 +44,7 @@ public class PlayMenuState extends JPanel implements State {
         g.setFont(new Font("Verdana", Font.BOLD, 40));
         String text = "PING PONG";
 
-        g.drawString(text, Game.instance.getWidth() / 2 - text.length() * 15, 60);
+        g.drawString(text, Game.getInstance().getWidth() / 2 - text.length() * 15, 60);
 
         for (Sprite s : Sprite.spritePool)
             s.paint(g2d);
@@ -52,12 +52,12 @@ public class PlayMenuState extends JPanel implements State {
 
     @Override
     public int getWidth() {
-        return Game.instance.getWidth();
+        return Game.getInstance().getWidth();
     }
 
     @Override
     public int getHeight() {
-        return Game.instance.getHeight();
+        return Game.getInstance().getHeight();
     }
 
     public void end() {
